@@ -142,3 +142,20 @@ class Cube
 						* $z_intersection->getSize();
 	}
 }
+
+class InvalidParameterException extends \Exception {}
+
+// Main
+try
+{
+	// if use getopt --interactive get the user to enter parameters, else
+	$first_cube = new Cube($argv[1],$argv[2],$argv[3],$argv[4]);
+	$second_cube = new Cube($argv[5],$argv[6],$argv[7],$argv[8]);
+}
+catch(InvalidParameterException $e)
+{
+	echo $e->getMessage();
+	echo "Use: > php cube.php x1 y1 z1 size1 x2 y2 z2 size2"
+}
+
+echo "Intersection volume: ".$first_cube->getVolumeIntersection($second_cube);
