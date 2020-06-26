@@ -140,10 +140,12 @@ class Cube
 	}
 }
 
-$line = new Line1D();
+$line = new Line1D(1,2);
 $cube = new Cube(1,2,3,4);
-$otherCube = new Cube(2,3,4,5);
+$otherCube = new Cube(3,2,4,5);
+$farAwayCube = new Cube(13,12,14,5);
 
-$volume = $cube->getVolumeIntersection($otherCube);
-
-echo "Volume of intersection is:".$volume."\n";
+echo sprintf("Size of Line is: %d \n", $line->getSize());
+echo sprintf("Volume of intersection is: %d\n", $cube->getVolumeIntersection($otherCube));
+echo sprintf("Volume of other way round intersection is: %d\n", $otherCube->getVolumeIntersection($cube));
+echo sprintf("Volume of intersection with far away cube is: %d\n", $otherCube->getVolumeIntersection($farAwayCube));
