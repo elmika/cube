@@ -1,6 +1,4 @@
-<?
-
-namespace \Sanbuka\Geometry
+<?php
 
 class Line1D
 {
@@ -16,8 +14,8 @@ class Line1D
 	{
 		if( is_null($b) ) return;
 
-		if( $this->isInt($a) === false) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( $this->isInt($b) === false) 	trow new InvalidParameterException("Parameters should be integers !");		 		
+		if( $this->isInt($a) === false) 	throw new \InvalidArgumentException("Parameters should be integers !");
+		if( $this->isInt($b) === false) 	throw new \InvalidArgumentException("Parameters should be integers !");
 
 		$this->min_point = min($a, $b);
 		$this->max_point = max($a, $b);
@@ -105,11 +103,11 @@ class Cube
 	public function __construct($x, $y, $z, $size)
 	{
 		$dummy = new Line1D();
-		if( ! $dummy->isInt($x) ) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $dummy->isInt($y) ) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $dummy->isInt($z) ) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $dummy->isInt($size) ) trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $size >= 0) 			trow new InvalidParameterException("Size is expected to be a positive integer !");
+		if( ! $dummy->isInt($x) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! $dummy->isInt($y) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! $dummy->isInt($z) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! $dummy->isInt($size) ) throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! ($size >= 0)) 			 throw new \InvalidArgumentException("Size is expected to be a positive integer !");
 		
 		$this->x_line = new Line1D($x, $x+$size);
 		$this->y_line = new Line1D($y, $y+$size);
@@ -142,3 +140,11 @@ class Cube
 						* $z_intersection->getSize();
 	}
 }
+
+$line = new Line1D();
+$cube = new Cube(1,2,3,4);
+$otherCube = new Cube(2,3,4,5);
+
+$volume = $cube->getVolumeIntersection($otherCube);
+
+echo "Volume of intersection is:".$volume."\n";
