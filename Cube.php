@@ -1,6 +1,4 @@
-<?
-
-namespace \Sanbuka\Geometry
+<?php
 
 class Line1D
 {
@@ -16,8 +14,8 @@ class Line1D
 	{
 		if( is_null($b) ) return;
 
-		if( $this->isInt($a) === false) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( $this->isInt($b) === false) 	trow new InvalidParameterException("Parameters should be integers !");		 		
+		if( $this->isInt($a) === false) 	throw new \InvalidArgumentException("Parameters should be integers !");
+		if( $this->isInt($b) === false) 	throw new \InvalidArgumentException("Parameters should be integers !");
 
 		$this->min_point = min($a, $b);
 		$this->max_point = max($a, $b);
@@ -27,7 +25,7 @@ class Line1D
 	public function getMax(){ return $this->max_point; }
 
 	public function isNull(){ return is_null($this->min_point); }
-	public function getSize(){ $this->isNull() ? 0 : ($this->getMax() - $this->getMin()); }
+	public function getSize(){ return $this->isNull() ? 0 : ($this->getMax() - $this->getMin()); }
 
 	/**
 	*	Are we fine with negative numbers ? Should be, but let's test...
@@ -105,11 +103,11 @@ class Cube
 	public function __construct($x, $y, $z, $size)
 	{
 		$dummy = new Line1D();
-		if( ! $dummy->isInt($x) ) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $dummy->isInt($y) ) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $dummy->isInt($z) ) 	trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $dummy->isInt($size) ) trow new InvalidParameterException("Parameters should be integers !");
-		if( ! $size >= 0) 			trow new InvalidParameterException("Size is expected to be a positive integer !");
+		if( ! $dummy->isInt($x) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! $dummy->isInt($y) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! $dummy->isInt($z) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! $dummy->isInt($size) ) throw new \InvalidArgumentException("Parameters should be integers !");
+		if( ! ($size >= 0)) 			 throw new \InvalidArgumentException("Size is expected to be a positive integer !");
 		
 		$this->x_line = new Line1D($x, $x+$size);
 		$this->y_line = new Line1D($y, $y+$size);
@@ -129,8 +127,7 @@ class Cube
 			default: throw new \Exception("Incorrect axis name ".$label);
 		}
 	}
-
-	public function getVolume(){ return $this->size * $this->size * $this->size; }
+	
 	public function getVolumeIntersection(Cube $c)
 	{
 		$x_intersection = $this->getLine('x')->getIntersection($c->getLine('x'));
@@ -142,3 +139,13 @@ class Cube
 						* $z_intersection->getSize();
 	}
 }
+
+$line = new Line1D(1,2);
+$cube = new Cube(1,2,3,4);
+$otherCube = new Cube(3,2,4,5);
+$farAwayCube = new Cube(13,12,14,5);
+
+echo sprintf("Size of Line is: %d \n", $line->getSize());
+echo sprintf("Volume of intersection is: %d\n", $cube->getVolumeIntersection($otherCube));
+echo sprintf("Volume of other way round intersection is: %d\n", $otherCube->getVolumeIntersection($cube));
+echo sprintf("Volume of intersection with far away cube is: %d\n", $otherCube->getVolumeIntersection($farAwayCube));
