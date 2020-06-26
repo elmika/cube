@@ -8,5 +8,10 @@
             "email": "1506612+elmika@users.noreply.github.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Sanbuka\\": "src/"
+        }
+    },
     "require": {}
 }
