@@ -25,7 +25,7 @@ class Line1D
 	public function getMax(){ return $this->max_point; }
 
 	public function isNull(){ return is_null($this->min_point); }
-	public function getSize(){ $this->isNull() ? 0 : ($this->getMax() - $this->getMin()); }
+	public function getSize(){ return $this->isNull() ? 0 : ($this->getMax() - $this->getMin()); }
 
 	/**
 	*	Are we fine with negative numbers ? Should be, but let's test...
