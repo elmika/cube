@@ -1,0 +1,12 @@
+{
+    "name": "sanbuka/geometry",
+    "description": "Little Programming Exercise",
+    "type": "project",
+    "authors": [
+        {
+            "name": "mika",
+            "email": "1506612+elmika@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
