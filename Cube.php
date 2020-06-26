@@ -127,8 +127,7 @@ class Cube
 			default: throw new \Exception("Incorrect axis name ".$label);
 		}
 	}
-
-	public function getVolume(){ return $this->size * $this->size * $this->size; }
+	
 	public function getVolumeIntersection(Cube $c)
 	{
 		$x_intersection = $this->getLine('x')->getIntersection($c->getLine('x'));
