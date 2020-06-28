@@ -21,5 +21,5 @@ With...
 ## Run Tests
 
 ```
-> php vendor/bin/phpunit test
+> php vendor/bin/phpunit --testdox test
 ```

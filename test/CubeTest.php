@@ -5,16 +5,16 @@ use Sanbuka\Cube;
 class CubeTest extends \PHPUnit\Framework\TestCase
 {
     /** @test */
-    public function it_should_do_what_it_should()
+    public function it_should_calculate_the_volume_of_intersection_with_another_cube()
     {
         $cube = new Cube(1,2,3,4);
         $otherCube = new Cube(3,2,4,5);
 
-        $this->assertTrue(24 == $cube->getVolumeIntersection($otherCube), "Volume of intersection is 27");
+        $this->assertTrue(24 == $cube->getVolumeIntersection($otherCube), "Volume of intersection is 24");
     }
 
     /** @test */
-    public function it_should_do_the_other_way_round()
+    public function it_should_preserve_intersection_volume_when_cubes_are_inverted()
     {
         $cube = new Cube(1,2,3,4);
         $otherCube = new Cube(3,2,4,5);
@@ -23,7 +23,7 @@ class CubeTest extends \PHPUnit\Framework\TestCase
     }
 
     /** @test */
-    public function it_should_do_zero()
+    public function it_should_return_0_when_cubes_do_not_intersect()
     {
         $cube = new Cube(1,2,3,4);
         $farAwayCube = new Cube(13,12,14,5);
