@@ -18,3 +18,8 @@ With...
 - **x2, y2, z3** coordinates of lower bound point of the second cube
 - **size2** the size of the second cube,
 
+## Run Tests
+
+```
+> php vendor/bin/phpunit test
+```
