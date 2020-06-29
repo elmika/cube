@@ -5,6 +5,13 @@ use Sanbuka\Line1D;
 class Line1DTest extends \PHPUnit\Framework\TestCase
 {
     /** @test */
+    public function it_should_throw_an_invalid_argument_exception()
+    {
+        $this->expectException(TypeError::class);
+        $line = new Line1D("a", "b");
+    }
+
+    /** @test */
     public function it_should_calculate_its_own_size()
     {
         $line = new Line1D(1,2);

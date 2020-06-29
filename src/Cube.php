@@ -14,13 +14,8 @@ class Cube
 	* @var int $z coordinate corresponding to z axis
 	* @var int $size size of the edge of the cube. Expected to be positive.
 	*/
-	public function __construct($x, $y, $z, $size)
+	public function __construct(int $x, int $y, int $z, int $size)
 	{
-		$dummy = new Line1D();
-		if( ! $dummy->isInt($x) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
-		if( ! $dummy->isInt($y) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
-		if( ! $dummy->isInt($z) ) 	 throw new \InvalidArgumentException("Parameters should be integers !");
-		if( ! $dummy->isInt($size) ) throw new \InvalidArgumentException("Parameters should be integers !");
 		if( ! ($size >= 0) 	)		 throw new \InvalidArgumentException("Size is expected to be a positive integer ! ".$size);
 		
 		$this->x_line = new Line1D($x, $x+$size);
@@ -38,7 +33,7 @@ class Cube
 			case 'x': return $this->getXLine(); break;
 			case 'y': return $this->getYLine(); break;
 			case 'z': return $this->getZLine(); break;
-			default: throw new \Exception("Incorrect axis name ".$label);
+			default: throw new \InvalidArgumentException("Incorrect axis name ".$label);
 		}
 	}
 }
