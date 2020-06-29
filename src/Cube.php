@@ -41,15 +41,4 @@ class Cube
 			default: throw new \Exception("Incorrect axis name ".$label);
 		}
 	}
-
-	public function getVolumeIntersection(Cube $c)
-	{
-		$x_intersection = $this->getLine('x')->getIntersection($c->getLine('x'));
-		$y_intersection = $this->getLine('y')->getIntersection($c->getLine('y'));
-		$z_intersection = $this->getLine('z')->getIntersection($c->getLine('z'));
-
-		return $x_intersection->getSize() 
-					* $y_intersection->getSize() 
-						* $z_intersection->getSize();
-	}
 }
