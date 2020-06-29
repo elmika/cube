@@ -2,18 +2,23 @@
 
 
 namespace Sanbuka;
-use Sanbuka\Cube;
 
 class CubeVolumeIntersectionCalculator
 {
     public static function run(Cube $cube, Cube $otherCube)
     {
-        $x_intersection = $cube->getLine('x')->getIntersection($otherCube->getLine('x'));
-        $y_intersection = $cube->getLine('y')->getIntersection($otherCube->getLine('y'));
-        $z_intersection = $cube->getLine('z')->getIntersection($otherCube->getLine('z'));
+        foreach(['x', 'y', 'z'] as $i) {
+            if(! $cube->getLine($i)->intersects($otherCube->getLine($i))){
+                return 0;
+            }
+        }
 
-        return $x_intersection->getSize()
-            * $y_intersection->getSize()
-            * $z_intersection->getSize();
+        $volume = 1;
+        foreach(['x', 'y', 'z'] as $i) {
+            $line =  $cube->getLine($i)->getIntersection($otherCube->getLine($i));
+            $volume *= $line->getSize();
+        }
+
+        return $volume;
     }
 }

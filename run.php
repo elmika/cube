@@ -3,6 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Sanbuka\Cube;
+use Sanbuka\CubeVolumeIntersectionCalculator;
 
 const CMD_EXECUTE_ARGUMENTS = "CMD_EXECUTE_ARGUMENTS";
 const CMD_INCORRECT_PARAMETERS = "CMD_INCORRECT_PARAMETERS";
@@ -39,19 +40,19 @@ try
         case CMD_INCORRECT_PARAMETERS:
             echo sprintf("Incorrect parameters\n");
         case CMD_NO_PARAM:
-            echo "Usage: > php cube.php x1 y1 z1 size1 x2 y2 z2 size2\n";
+            echo "Usage: > php run.php x1 y1 z1 size1 x2 y2 z2 size2\n";
             break;
         case CMD_EXECUTE_ARGUMENTS:
             // if use getopt --interactive get the user to enter parameters, else
             $first_cube = new Cube($argv[1],$argv[2],$argv[3],$argv[4]);
             $second_cube = new Cube($argv[5],$argv[6],$argv[7],$argv[8]);
 
-            echo sprintf("Intersection volume: %d\n", $first_cube->getVolumeIntersection($second_cube));
+            echo sprintf("Intersection volume: %d\n", CubeVolumeIntersectionCalculator::run($first_cube, $second_cube));
             break;
     }
 }
 catch(\InvalidArgumentException $e)
 {
     echo sprintf("Error: %s\n", $e->getMessage());
-    echo "Usage: > php cube.php x1 y1 z1 size1 x2 y2 z2 size2\n";
+    echo "Usage: > php run.php x1 y1 z1 size1 x2 y2 z2 size2\n";
 }
